@@ -1,0 +1,169 @@
+import { Carousel } from 'react-responsive-carousel';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { image1, image2, image3, image4, image5, image6, image7 } from '../assets/images/Images';
+
+const images = [image1, image3, image2, image4, image5, image6, image7 ];
+
+const Landing = () => {
+  return (
+    <Wrapper>
+      <div className='under-color'>
+        <div className='main'>
+          <nav className='navBar'>
+            <Link className='links' to={'/selection'}>Play</Link>
+            <Link className='links' to={'/Login'}>Login</Link>
+            <Link className='links' to={'/AddStrat'}>Add A Strat</Link>
+          </nav>
+          <div className='body'>
+            <div className='text-container'>
+              <div className='top-text'>
+                <h2 className='white'>COUNTERSTRIKE 2</h2>
+                <h2 className='orange'>COUNTERSTRIKE 2</h2>
+                <h2 className='white'>COUNTERSTRIKE 2</h2>
+                <h2 className='orange'>COUNTERSTRIKE 2</h2>
+                <h2 className='white'>COUNTERSTRIKE 2</h2>
+              </div>
+              <div className='bottom-text'>
+                <div className='bottom-text-container'>
+                  <h2 className='white'>STRAT-ROULETTE</h2>
+                  <h2 className='orange'>STRAT-ROULETTE</h2>
+                  <h2 className='white'>STRAT-ROULETTE</h2>
+                  <h2 className='orange'>STRAT-ROULETTE</h2>
+                  <h2 className='white'>STRAT-ROULETTE</h2>
+                </div>
+              </div>
+            </div>
+            <div className='img-container'>
+              <div className='box'>
+                <Carousel
+                  showArrows={false}
+                  useKeyboardArrows={false}
+                  showStatus={false}
+                  showThumbs={false}
+                  autoPlay={true} // Enable automatic sliding
+                  interval={3000} // Set the interval (in milliseconds) for each slide
+                  infiniteLoop={true}
+                >
+                  {images.map((image, index) => (
+                    <div key={index} className='slide'>
+                      <img alt='sample_file' src={image} />
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.div`
+
+.links:visited{
+  color: white;
+}
+
+.links{
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-color: #FF4C29;
+  padding: 10px;
+  border-radius: 30px;
+  opacity: 90%;
+  box-shadow: 0px 0px 5px black;
+}
+
+.links:hover{
+  transform: scale(1.05);
+}
+
+.box {
+    width: 100%;
+    max-width: 1200px; /* Adjust the maximum width as needed */
+    margin: 0 auto;
+    margin-top: 150px;
+    box-shadow: 0px 2px 15px black;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .slide {
+    text-align: center;
+  }
+
+  .slide img {
+    max-width: 100%;
+    max-height: 500px; /* Adjust the maximum height as needed */
+    margin: 0 auto;
+  }
+
+.navBar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: var(--main-font);
+    font-size: 35px;
+    gap: 100px;
+    margin-top: 50px;
+    margin-right: 120px;
+    color: #ffff;
+    text-shadow: 0px 5px 20px black;
+  }
+
+  .navBar-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .main {
+    position: absolute;
+    width: calc(100vw - 10px);
+    height: calc(100vh - 10px);
+    background-size: 100% 100%;
+    background-repeat: no-repeat; /* Ensure the gradient does not repeat */
+    background: linear-gradient(#3c4c5a, #0a1924);
+    inset:0px 10px;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  .img-container{
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .text-container{
+    width: 100vw;
+    position: absolute;
+    letter-spacing: .5px;
+    line-height: 60px;
+    font-size: 50px;
+    font-family: var(--main-font);
+    z-index: 10;
+    display: flex; /* Add this line */
+    justify-content: flex-end; /* Add this line to move 'bottom-text' to the right side */
+    align-items: center; /* Align vertically if needed */
+    flex-direction: column; /* Display text vertically */
+  }
+
+  .top-text{
+    margin-left: 200px;
+    height: 100%;
+    width: 100vw;
+  }
+
+  .bottom-text{
+    margin-top: 150px;
+    margin-right: 200px;
+    width: 100vw;
+    text-align: right;
+  }
+
+`
+
+export default Landing
