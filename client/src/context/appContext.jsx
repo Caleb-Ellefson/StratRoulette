@@ -43,7 +43,7 @@ import {
     statusOptions: ['Pending', 'Accepted'],
     stratDescription:'',
     stratName:'',
-    Team:'Both',
+    team:'Both',
     status:'Pending'
 
   
