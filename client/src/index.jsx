@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   {
     path:'/Strat',
     element:<Strat/>
-
+ 
   },
   {
     path:'/Selection',
