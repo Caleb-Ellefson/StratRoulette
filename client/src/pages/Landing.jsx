@@ -18,7 +18,6 @@ const Landing = () => {
           <div className='body'>
             <div className='text-container'>
               <div className='top-text'>
-                <h2 className='white'>COUNTERSTRIKE 2</h2>
                 <h2 className='orange'>COUNTERSTRIKE 2</h2>
                 <h2 className='white'>COUNTERSTRIKE 2</h2>
                 <h2 className='orange'>COUNTERSTRIKE 2</h2>
@@ -30,7 +29,6 @@ const Landing = () => {
                   <h2 className='orange'>STRAT-ROULETTE</h2>
                   <h2 className='white'>STRAT-ROULETTE</h2>
                   <h2 className='orange'>STRAT-ROULETTE</h2>
-                  <h2 className='white'>STRAT-ROULETTE</h2>
                 </div>
               </div>
             </div>
@@ -66,11 +64,15 @@ const Wrapper = styled.div`
   color: white;
 }
 
+
+
 .links{
   text-decoration: none;
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   background-color: #FF4C29;
-  padding: 10px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
   border-radius: 30px;
   opacity: 90%;
   box-shadow: 0px 0px 5px black;
@@ -82,9 +84,8 @@ const Wrapper = styled.div`
 
 .box {
     width: 100%;
-    max-width: 1200px; /* Adjust the maximum width as needed */
+    max-width: 90%; /* Adjust the maximum width as needed */
     margin: 0 auto;
-    margin-top: 150px;
     box-shadow: 0px 2px 15px black;
     display: flex;
     justify-content: center;
@@ -97,7 +98,7 @@ const Wrapper = styled.div`
 
   .slide img {
     max-width: 100%;
-    max-height: 500px; /* Adjust the maximum height as needed */
+    max-height: 700px; /* Adjust the maximum height as needed */
     margin: 0 auto;
   }
 
@@ -134,6 +135,8 @@ const Wrapper = styled.div`
   .img-container{
     display: flex;
     justify-content: center;
+    padding: 4rem;
+
   }
 
 
@@ -152,14 +155,14 @@ const Wrapper = styled.div`
   }
 
   .top-text{
-    margin-left: 200px;
+    margin-left: 100px;
     height: 100%;
     width: 100vw;
   }
 
   .bottom-text{
-    margin-top: 150px;
-    margin-right: 200px;
+    margin-top: 270px;
+    margin-right: 100px;
     width: 100vw;
     text-align: right;
   }

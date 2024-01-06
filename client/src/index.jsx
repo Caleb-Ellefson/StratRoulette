@@ -1,7 +1,10 @@
 import { createBrowserRouter,
  RouterProvider,
 } from 'react-router-dom'
-import {Selection, Map, Strat, Error, Landing, Login, AddStrat } from './pages/Index.js'
+import {Selection, Map, Strat, Error, Landing, Login, AddStrat, Register } from './pages/Index.js'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { action as registerAction } from './pages/Register';
+import {action as loginAction } from './pages/Login.jsx'
 
 
 
@@ -30,6 +33,13 @@ const router = createBrowserRouter([
   {
     path:'/Login',
     element:<Login/>,
+    action: loginAction(QueryClient),
+    errorElement: <Error />
+  },
+  {
+    path:'/Register',
+    element:<Register/>,
+    action: registerAction,
     errorElement: <Error />
   },
   {
@@ -37,6 +47,7 @@ const router = createBrowserRouter([
     element:<AddStrat/>,
     errorElement: <Error />
   },
+
 ])
 
 const App = () => {

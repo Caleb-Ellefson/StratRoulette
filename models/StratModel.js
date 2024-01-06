@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
-import { STATUS, TEAM } from '../ utils/constants.js';
-
-
+import { STATUS, TEAM } from '../utils/constants.js';
 const StratSchema = new mongoose.Schema(
   {
     stratName: String,
@@ -15,6 +13,10 @@ const StratSchema = new mongoose.Schema(
       type: String,
       enum: Object.values(TEAM),
       default: TEAM.BOTH,
+    },
+    createdBy: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
     },
   },
   { timestamps: true }

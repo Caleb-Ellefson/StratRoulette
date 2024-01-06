@@ -1,12 +1,13 @@
 export const STATUS = {
     PENDING: 'pending',
     DECLINED: 'declined',
+    APPROVED: 'approved'
   };
   
   export const TEAM = {
     CT: 'CT',
     T: 'T',
-    BOTH: 'Both',
+    BOTH: 'both',
   };
   
   export const Strat_SORT_BY = {

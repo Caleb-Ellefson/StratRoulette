@@ -1,142 +1,106 @@
-import { useState, useEffect } from 'react';
-import {  FormRow, Alert } from '../components/Index.js';
-import { useAppContext } from '../context/appContext.jsx';
+import { Link, Form, redirect, useNavigate } from 'react-router-dom';
+import { FormRow, SubmitBtn, NavBar } from '../components/Index.js';
+import customFetch from '../utils/customFetch';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import {NavBar} from '../components/Index.js';
 
-
-const initialState = {
-  name: '',
-  email: '',
-  password: '',
-  isMember: true,
-};
-
-const NewStrat = () => {
-  const navigate = useNavigate()
-  const [values, setValues] = useState(initialState);
-  const { user, isLoading, showAlert, displayAlert, setupUser } =
-    useAppContext();
-
-  const toggleMember = () => {
-    setValues({ ...values, isMember: !values.isMember });
-  };
-
-  const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const { name, email, password, isMember } = values;
-    if (!email || !password || (!isMember && !name)) {
-      displayAlert();
-      return;
-    }
-    const currentUser = { name, email, password };
-    if (isMember) {
-      setupUser({
-        currentUser,
-        endPoint: 'login',
-        alertText: 'Login Successful! Redirecting...',
-      });
-    } else {
-      setupUser({
-        currentUser,
-        endPoint: 'register',
-        alertText: 'User Created! Redirecting...',
-      });
+export const action =
+  (queryClient) =>
+  async ({ request }) => {
+    const formData = await request.formData();
+    const data = Object.fromEntries(formData);
+    try {
+      await customFetch.post('/auth/login', data);
+      queryClient.invalidateQueries();
+      toast.success('Login successful');
+      return redirect('/');
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      return error;
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      setTimeout(() => {
-        navigate('/');
-      }, 3000);
-    }
-  }, [user, navigate]);
+const Login = () => {
+  const navigate = useNavigate();
 
+  const loginDemoUser = async () => {
+    const data = {
+      email: 'test@test.com',
+      password: 'secret123',
+    };
+    try {
+      await customFetch.post('/auth/login', data);
+      toast.success('Take a test drive');
+      navigate('/dashboard');
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+    }
+  };
   return (
-    <Wrapper className='full-page'>
-      <NavBar />
-      <form className='form' onSubmit={onSubmit}>
-        <h3>{values.isMember ? 'Login' : 'Register'}</h3>
-        {showAlert && <Alert />}
-        {/* name input */}
-        {!values.isMember && (
-          <FormRow
-            type='text'
-            name='name'
-            value={values.name}
-            handleChange={handleChange}
-          />
-        )}
-
-        {/* email input */}
-        <FormRow
-          type='email'
-          name='email'
-          value={values.email}
-          handleChange={handleChange}
-        />
-        {/* password input */}
-        <FormRow
-          type='password'
-          name='password'
-          value={values.password}
-          handleChange={handleChange}
-        />
-        <button type='submit' className='btn btn-block' disabled={isLoading}>
-          submit
-        </button>
-
-        <p>
-          {values.isMember ? 'Not a member yet?' : 'Already a member?'}
-          <button type='button' onClick={toggleMember} className='member-btn'>
-            {values.isMember ? 'Register' : 'Login'}
+    <Wrapper>
+      <div className='grid-item'>
+        <NavBar />
+      </div>
+      <div className='grid-item'>
+        <Form method='post' className='form'>
+          <h4>Login</h4>
+          <FormRow type='email' name='email' />
+          <FormRow type='password' name='password' />
+          <SubmitBtn />
+          <button type='button' className='btn btn-block' onClick={loginDemoUser}>
+            explore the app
           </button>
-        </p>
-      </form>
+          <p>
+            Not a member yet?
+            <Link to='/register' className='member-btn'>
+              Register
+            </Link>
+          </p>
+        </Form>
+      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background: linear-gradient(#3c4c5a, #0a1924);
-  .logo {
+background: linear-gradient(#3c4c5a, #0a1924);
+min-height: 100vh;
+display: grid;
+align-items: center;
+grid-template-rows: 20% 80%;
+.logo {
     display: block;
     margin: 0 auto;
     margin-bottom: 1.38rem;
-  }
-  .form {
-    max-width: 450px;
+}
+.form {
+    display:grid;
+    align-items: center;
+    margin-bottom: 175px;
+    max-width: 400px;
     border-top: 5px solid var(--primary-500);
 
-  }
+}
 
-  h3 {
+.grid-item{
+  display: grid;
+}
+h4 {
     text-align: center;
-  }
-  p {
-    margin: 0;
+    margin-bottom: 1.38rem;
+}
+p {
     margin-top: 1rem;
     text-align: center;
-  }
-  .btn {
+    line-height: 1.5;
+}
+.btn {
     margin-top: 1rem;
-  }
-  .member-btn {
-    background: transparent;
-    border: transparent;
+}
+.member-btn {
     color: var(--primary-500);
-    cursor: pointer;
-    letter-spacing: var(--letterSpacing);
-  }
-`
-
-
-export default NewStrat
+    letter-spacing: var(--letter-spacing);
+    margin-left: 0.25rem;
+}
+`;
+export default Login

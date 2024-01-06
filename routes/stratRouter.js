@@ -1,14 +1,16 @@
 import { Router }  from 'express'
+import { validateStratInput } from '../middleware/validationMiddleware.js'
 
 const router = Router()
 
-import { createStrat, getStrat } from '../controllers/stratcontroller.js'
+import { createStrat, findStrat, deleteStrat, updateStrat, approvedStrat } from '../controllers/stratcontroller.js'
 
 // router.post('/',createStrat)
 
 
 //Chain .post(function).get(function).delete(function)
-router.route('/').post(createStrat).get(getStrat)
-// router.route('/:id').delete(deleteStrat)
+router.route('/').post(validateStratInput, createStrat).get(findStrat)
+router.route('/all').get(approvedStrat)
+router.route('/:id').delete(deleteStrat).patch(validateStratInput, updateStrat)
 
 export default router
