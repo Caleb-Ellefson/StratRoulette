@@ -1,41 +1,37 @@
-import { Link, Form, redirect, useNavigate } from 'react-router-dom';
+
 import { FormRow, SubmitBtn, NavBar } from '../components/Index.js';
+import { Link, Form, redirect, Outlet, } from 'react-router-dom';
 import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
+
+
+
 export const action =
   (queryClient) =>
   async ({ request }) => {
+    //Grab the data from the form
     const formData = await request.formData();
+    //Convert data to object
     const data = Object.fromEntries(formData);
     try {
+      //Login route using data from form
       await customFetch.post('/auth/login', data);
-      queryClient.invalidateQueries();
+
+      // queryClient.invalidateQueries();
       toast.success('Login successful');
       return redirect('/');
     } catch (error) {
-      toast.error(error?.response?.data?.msg);
+      console.log(error)
+      toast.error(error?.response?.data);
       return error;
     }
   };
 
 const Login = () => {
-  const navigate = useNavigate();
 
-  const loginDemoUser = async () => {
-    const data = {
-      email: 'test@test.com',
-      password: 'secret123',
-    };
-    try {
-      await customFetch.post('/auth/login', data);
-      toast.success('Take a test drive');
-      navigate('/dashboard');
-    } catch (error) {
-      toast.error(error?.response?.data?.msg);
-    }
-  };
+
   return (
     <Wrapper>
       <div className='grid-item'>
@@ -47,9 +43,6 @@ const Login = () => {
           <FormRow type='email' name='email' />
           <FormRow type='password' name='password' />
           <SubmitBtn />
-          <button type='button' className='btn btn-block' onClick={loginDemoUser}>
-            explore the app
-          </button>
           <p>
             Not a member yet?
             <Link to='/register' className='member-btn'>

@@ -1,19 +1,85 @@
 import { Carousel } from 'react-responsive-carousel';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { image1, image2, image3, image4, image5, image6, image7 } from '../assets/images/Images';
+import { Link, Form, redirect, Outlet, useLoaderData } from 'react-router-dom';
+import customFetch from '../utils/customFetch';
+import { toast } from 'react-toastify';
+import { get } from 'mongoose';
+import React, { useEffect } from 'react';
 
 const images = [image1, image3, image2, image4, image5, image6, image7 ];
 
+
+
+
+
+
 const Landing = () => {
+
+  const logoutUser = async () => {
+    await customFetch.get('/auth/logout');
+    setState( state => {
+      return {
+        ...state,
+        isUserLoggedIn: false,
+        userAdmin: false
+      }
+      })
+  
+    toast.success('Logging out...');
+    redirect('/')
+  };
+
+
+
+  let [state, setState] = React.useState({
+    isUserLoggedIn : false,
+    userAdmin : false,
+  })
+  const getCurrentUser = async () => {
+    try {
+      const { data } = await customFetch.get('/users/current-user');
+      const status = data.user.role
+        if (status === 'admin'){
+           setState( state => {
+            return {
+              ...state,
+              isUserLoggedIn: true,
+              userAdmin: true
+            }
+            })
+        }
+        if (status === 'user'){
+          setState( state => {
+            return {
+              ...state,
+              isUserLoggedIn: true,
+              userAdmin: false
+            }
+            })
+        }
+      return status;
+    } catch (error) {
+      return null
+    }
+  }
+    useEffect(() => {
+      getCurrentUser()
+    },[])
+  
   return (
     <Wrapper>
       <div className='under-color'>
         <div className='main'>
           <nav className='navBar'>
             <Link className='links' to={'/selection'}>Play</Link>
-            <Link className='links' to={'/Login'}>Login</Link>
-            <Link className='links' to={'/AddStrat'}>Add A Strat</Link>
+            {state.isUserLoggedIn === false && <Link className='links' to={'/Login'}>Login</Link>}
+            {state.isUserLoggedIn === true &&  <Link className='links' to={'/AddStrat'}>Add A Strat</Link>}
+            {state.isUserLoggedIn === true && <Link className='links' onClick={logoutUser}>Logout </Link>}
+            {state.userAdmin === true && 
+              <Link className='links' to={'/Admin'}>Admin</Link>
+            }
+            
           </nav>
           <div className='body'>
             <div className='text-container'>

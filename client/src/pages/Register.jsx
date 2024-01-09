@@ -14,11 +14,11 @@ export const action = async ({ request }) => {
     toast.success('Registration successful');
     return redirect('/login');
   } catch (error) {
-    toast.error(error?.response?.data?.msg);
-
+    toast.error(error?.response?.data);
     return error;
   }
 };
+
 const Register = () => {
   return (
     <Wrapper>
@@ -39,6 +39,7 @@ const Register = () => {
     </Wrapper>
   );
 };
+
 
 const Wrapper = styled.section`
 background: linear-gradient(#3c4c5a, #0a1924);
