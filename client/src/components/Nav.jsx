@@ -13,7 +13,6 @@ const Wrapper = styled.nav `
     align-items:center;
     justify-content: center;
     padding: 0;
-
   }
 
 

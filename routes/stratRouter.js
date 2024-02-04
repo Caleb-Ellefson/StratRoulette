@@ -3,7 +3,7 @@ import { validateStratInput } from '../middleware/validationMiddleware.js'
 
 const router = Router()
 
-import { createStrat, findStrat, deleteStrat, updateStrat, approvedStrat } from '../controllers/stratcontroller.js'
+import { createStrat, findStrat, deleteStrat, updateStrat, approvedStrat, getStrat } from '../controllers/stratcontroller.js'
 
 // router.post('/',createStrat)
 
@@ -11,6 +11,6 @@ import { createStrat, findStrat, deleteStrat, updateStrat, approvedStrat } from 
 //Chain .post(function).get(function).delete(function)
 router.route('/').post(validateStratInput, createStrat).get(findStrat)
 router.route('/all').get(approvedStrat)
-router.route('/:id').delete(deleteStrat).patch(validateStratInput, updateStrat)
+router.route('/:id').delete(deleteStrat).patch(updateStrat).get(getStrat)
 
 export default router

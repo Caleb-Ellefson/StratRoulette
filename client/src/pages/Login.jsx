@@ -6,8 +6,6 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 
-
-
 export const action =
   (queryClient) =>
   async ({ request }) => {
@@ -30,7 +28,7 @@ export const action =
   };
 
 const Login = () => {
-
+  
 
   return (
     <Wrapper>

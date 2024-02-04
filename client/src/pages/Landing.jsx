@@ -58,7 +58,7 @@ const Landing = () => {
             }
             })
         }
-      return status;
+      return {status};
     } catch (error) {
       return null
     }
@@ -66,6 +66,7 @@ const Landing = () => {
     useEffect(() => {
       getCurrentUser()
     },[])
+
   
   return (
     <Wrapper>
@@ -173,9 +174,9 @@ const Wrapper = styled.div`
     justify-content: flex-end;
     align-items: center;
     font-family: var(--main-font);
-    font-size: 35px;
+    font-size: 30px;
     gap: 100px;
-    margin-top: 50px;
+    margin-top: 15px;
     margin-right: 120px;
     color: #ffff;
     text-shadow: 0px 5px 20px black;

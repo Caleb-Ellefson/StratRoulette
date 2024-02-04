@@ -7,7 +7,7 @@ export const STATUS = {
   export const TEAM = {
     CT: 'CT',
     T: 'T',
-    BOTH: 'both',
+    BOTH: 'Both',
   };
   
   export const Strat_SORT_BY = {

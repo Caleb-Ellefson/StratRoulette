@@ -10,8 +10,14 @@ export const findStrat = async (req, res) => {
 
     if (!strat) throw new NotFoundError('There are no current pending strats.')
 
-    res.status(200).json({ strat })
+    res.status(200).json( {strat} )
 }
+
+//find single strat
+export const getStrat = async (req, res) => {
+    const strat = await Strat.findById(req.params.id);
+    res.status(StatusCodes.OK).json({ strat });
+  };
 
 
 export const approvedStrat = async (req, res) => {
