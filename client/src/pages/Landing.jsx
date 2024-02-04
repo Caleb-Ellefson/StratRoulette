@@ -127,11 +127,14 @@ const Landing = () => {
 
 const Wrapper = styled.div`
 
-.links:visited{
+Link:visited {
   color: white;
+  text-emphasis: none;
 }
 
-
+Link:hover {
+  text-decoration: none !important;
+}
 
 .links{
   text-decoration: none;

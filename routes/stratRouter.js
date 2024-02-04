@@ -3,7 +3,7 @@ import { validateStratInput } from '../middleware/validationMiddleware.js'
 
 const router = Router()
 
-import { createStrat, findStrat, deleteStrat, updateStrat, approvedStrat, getStrat } from '../controllers/stratcontroller.js'
+import { createStrat, findStrat, deleteStrat, updateStrat, approvedStrat, getStrat } from '../controllers/stratController.js'
 
 // router.post('/',createStrat)
 
