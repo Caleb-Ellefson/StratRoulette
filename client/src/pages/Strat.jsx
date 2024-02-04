@@ -118,6 +118,7 @@ const Wrapper = styled.div`
   }
 
   .buttons {
+    padding: .5rem;
     box-shadow: 0px 2px 15px black;
     margin-top: 20px;
     display: flex;
