@@ -20,7 +20,7 @@ import path from 'path';
 // Routers
 import stratRouter from './routes/stratRouter.js'
 import authRouter from './routes/authRouter.js'
-import userRouter from './routes/userRotuer.js'
+import userRouter from './routes/userRouter.js'
 
 //Middleware
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
@@ -42,12 +42,6 @@ if (process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
 }
 
-
-app.get('/api/v1/test', (req,res) =>{
-  res.json({msg: 'test route'})
-})
-
-
 app.use('/api/v1/strats',authenticateUser, stratRouter)
 app.use('/api/v1/users' ,authenticateUser, userRouter )
 app.use('/api/v1/auth' , authRouter )
@@ -64,17 +58,14 @@ app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT || 5100;
 
-const start = async () => {
-    try {
-      await mongoose.connect(process.env.MONGO_URL);
-      app.listen(port, () => {
-        console.log(`Server is listening on port ${port}...`);
-      });
-    } catch (error) {
-      console.log(error);
-      process.exit(1)
-    }
-  };
+try {
+  await mongoose.connect(process.env.MONGO_URL);
+  app.listen(port, () => {
+    console.log(`server running on PORT ${port}...`);
+  });
+} catch (error) {
+  console.log(error);
+  process.exit(1);
+}
   
-  start();
 
