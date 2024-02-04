@@ -4,5 +4,8 @@ import FormRow from "./FormRow";
 import  Alert  from "./Alert";
 import FormRowSelect from "./FormRowSelect";
 import Loading from "./Loading";
+import SubmitBtn from "./SubmitBtn";
+import StratContainer from "./StratContainer";
+import Strat from "./Strat";
 
-export {NavBar, Typewriter, FormRow, Alert, FormRowSelect, Loading, }
+export {NavBar, Typewriter, FormRow, Alert, FormRowSelect, Loading, SubmitBtn, StratContainer, Strat, }

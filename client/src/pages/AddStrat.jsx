@@ -1,7 +1,27 @@
 
 import styled from 'styled-components'
-import { FormRow, FormRowSelect, Alert, NavBar } from '../components/Index'
+import { FormRow, FormRowSelect, Alert, NavBar, SubmitBtn } from '../components/Index'
 import { useAppContext } from '../context/appContext'
+import { toast } from 'react-toastify';
+import customFetch from '../utils/customFetch';
+import { Form, redirect, useOutletContext } from 'react-router-dom';
+
+export const action =
+(queryClient) =>
+async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await customFetch.post('/strats', data);
+
+    toast.success('Strat added successfully ');
+    return redirect('/');
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return error;
+  }
+};
+
 
 const AddStrat = () => {
 
@@ -21,6 +41,7 @@ const AddStrat = () => {
         createJob,
         editJob,
       } = useAppContext()
+
     
       const handleSubmit = (e) => {
         e.preventDefault()
@@ -41,11 +62,12 @@ const AddStrat = () => {
         handleChange({ name, value })
       }
 
+
   return (
     <Wrapper>
-        <NavBar />
+      <NavBar />
         <div className='container'>
-            <form className='form'>
+            <Form method='post' className='form'>
                 <h3>Create a Strat</h3>
                 {showAlert && <Alert />}
                 <div className='form-center'>
@@ -53,29 +75,16 @@ const AddStrat = () => {
                     <FormRow
                     type='text'
                     name='stratName'
-                    value={stratName}
-                    handleChange={handleStratInput}
                     />
-                    {/* company */}
-                    {/* job status */}
-                    {/* ADMIN ONLY */}
-                    {/* <FormRowSelect
-                    name='status'
-                    value={status}
-                    handleChange={handleStratInput}
-                    list={statusOptions}
-                    /> */}
-                    {/* job type */}
                     <FormRowSelect
                     name='Team'
                     labelText='Team'
-                    value={Team}
-                    handleChange={handleStratInput}
                     list={teamTypeOptions}
+                    defaultValue={teamTypeOptions[2]}
                     />
                     <div className='form-row'>
                         <label className='form-label'>
-                        Strat
+                          Strat
                         </label>
                         <textarea
                             type='text'
@@ -87,14 +96,7 @@ const AddStrat = () => {
                     </div>
                     {/* btn container */}
                     <div className='btn-container'>
-                    <button
-                        type='submit'
-                        className='btn btn-block submit-btn'
-                        onClick={handleSubmit}
-                        disabled={isLoading}
-                    >
-                        submit
-                    </button>
+                    <SubmitBtn  formBtn/>
                     <button
                         className='btn btn-block clear-btn'
                         onClick={(e) => {
@@ -106,15 +108,14 @@ const AddStrat = () => {
                     </button>
                     </div>
                 </div>
-            </form>
+            </Form>
         </div>
-        
     </Wrapper>
   )
 }
 
 const Wrapper = styled.section`
-  border-radius: var(--borderRadius);
+
   width: 100vw;
   height: 100vh;
   background: var(--white);

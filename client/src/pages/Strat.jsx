@@ -2,40 +2,78 @@ import styled from 'styled-components';
 import Reroll from '../assets/images/reroll.png';
 import Typewriter from '../components/TyperWriter';
 import Nav from '../components/Nav'
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import customFetch from '../utils/customFetch';
+import { Link, Navigate, useLoaderData, useNavigate } from 'react-router-dom';
+
+
+export const loader = async () => {
+  try {
+    const { data } = await customFetch.get("/strats/all");
+
+    return { data };
+  } catch (error) {
+    toast.error("Something went wrong getting strats");
+    return 1;
+  }
+};
 
 const Strat = () => {
-  return (
+  const { data } = useLoaderData();
+  const { strat } = data;
 
-      <div className='under-color'>
-        <div className='main-color'>
+  const [randomIndex, setRandomIndex] = useState(0); // Initialize with 0
+  const [rerenderKey, setRerenderKey] = useState(0); // Add a rerender key to clear Typewriter
+
+
+  const handleReroll = () => {
+    const newIndex = Math.floor(Math.random() * strat.length);
+    setRandomIndex(newIndex); // Update the random index
+    setRerenderKey(prevKey => prevKey + 1); // Increment the rerender key
+  }
+
+  const handleNextStrat = () => {
+    const newIndex = Math.floor(Math.random() * strat.length);
+    setRandomIndex(newIndex); // Update the random index
+    setRerenderKey(prevKey => prevKey + 1); // Increment the rerender key
+  }
+
+  return (
+    <div className='under-color'>
+      <div className='main-color'>
         <Wrapper>
           <Nav />
           <div className='body'>
             <h1 className='header'>0 - 16</h1>
             <div className='container-main'>
               <div className='screen'>
-                <div className='text-container'>
-                  <p>
-                    <Typewriter text='Hello World' delay={100}/>
+                <div className='text-container' key={rerenderKey}>
+                  <h1 className='typeHeader'>
+                    <Typewriter text={`mission ${strat[randomIndex].stratName}`} delay={100} />
+                  </h1>
+                  <p className='type'>
+                    <Typewriter text={strat[randomIndex].stratDescription} delay={100} />
                   </p>
                 </div>
               </div>
             </div>
             <div className='button-container'>
-              <button className='buttons'>
+              <button className='buttons' onClick={handleReroll}>
                 <img className='dice' draggable="false" src={Reroll} alt='reroll' />
                 <h4 className='reroll'>REROLL</h4>
               </button>
-              <button className='buttons'>
+              <button className='buttons' onClick={handleNextStrat}>
                 <h4>NEXT STRAT</h4>
               </button>
             </div>
           </div>
         </Wrapper>
-        </div>
       </div>
+    </div>
   );
 };
+
 
 
 
@@ -116,14 +154,19 @@ const Wrapper = styled.div`
     font-weight: 700;
   }
 
-  p{
+  .type{
     margin-top: 30px;
     font-size: 24px;
     text-indent: 30px;
     color:#4AF626;
     font-family: var(--main-font);
-    
-    
+  }
+  .typeHeader{
+    margin-top: 30px;
+    font-size: 30px;
+    text-indent: 30px;
+    color:#4AF626;
+    font-family: var(--main-font);
   }
 
 

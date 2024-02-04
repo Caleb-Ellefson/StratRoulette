@@ -17,8 +17,9 @@ import image4 from './image4.jpg'
 import image5 from './image5.jpg'
 import image6 from './image6.jpg'
 import image7 from './image7.jpg'
+import Both from './Both.jpg'
 
 
 
 
-export {Ancient,Dust,Anubis,inferno,nuke,overpass,mirage,train,office,vertigo, Ct, T, image2, image1, image3, image4, image5, image6, image7}
+export {Ancient,Dust,Anubis,inferno,nuke,overpass,mirage,train,office,vertigo, Ct, T, image2, image1, image3, image4, image5, image6, image7, Both}

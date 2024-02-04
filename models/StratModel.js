@@ -1,0 +1,25 @@
+import mongoose from 'mongoose';
+import { STATUS, TEAM } from '../utils/constants.js';
+const StratSchema = new mongoose.Schema(
+  {
+    stratName: String,
+    stratDescription: String,
+    statusOptions: {
+      type: String,
+      enum: Object.values(STATUS),
+      default: STATUS.PENDING,
+    },
+    Team: {
+      type: String,
+      enum: Object.values(TEAM),
+      default: TEAM.BOTH,
+    },
+    createdBy: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+    },
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model('Strat', StratSchema);

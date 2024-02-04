@@ -1,8 +1,15 @@
 import { createBrowserRouter,
  RouterProvider,
+ useLoaderData
 } from 'react-router-dom'
-import {Selection, Map, Strat, Error, Landing, Login, AddStrat } from './pages/Index.js'
-
+import {Selection, Map, Strat, Error, Landing, Login, AddStrat, Register, Admin, AllStrats } from './pages/Index.js'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { action as registerAction } from './pages/Register';
+import { action as loginAction } from './pages/Login.jsx'
+import { loader as userLoader } from './pages/Admin.jsx'
+import { action as submitAction } from './pages/AddStrat.jsx'
+import { loader as dataLoader } from './pages/AllStrats.jsx'
+import { loader as stratLoader } from './pages/Strat.jsx'
 
 
 
@@ -10,7 +17,8 @@ const router = createBrowserRouter([
   {
     path:'/',
     element:<Landing />,
-    errorElement: <Error />
+    errorElement: <Error />,
+
   },
   {
     path:'/Map',
@@ -19,8 +27,8 @@ const router = createBrowserRouter([
   },
   {
     path:'/Strat',
-    element:<Strat/>
-
+    element:<Strat/>,
+    loader: stratLoader,
   },
   {
     path:'/Selection',
@@ -30,13 +38,32 @@ const router = createBrowserRouter([
   {
     path:'/Login',
     element:<Login/>,
+    action: loginAction(QueryClient),
+    errorElement: <Error />
+  },
+  {
+    path:'/Register',
+    element:<Register/>,
+    action: registerAction,
     errorElement: <Error />
   },
   {
     path:'/AddStrat',
     element:<AddStrat/>,
+    action: submitAction(QueryClient),
+  },
+  {
+    path:'/Admin',
+    element:<Admin/>,
+    loader: userLoader,
     errorElement: <Error />
   },
+  {
+    path:'/Admin',
+    element:<AllStrats />,
+    loader: dataLoader,
+  }
+
 ])
 
 const App = () => {
@@ -44,8 +71,8 @@ const App = () => {
   return (
 
       <div>
-        <RouterProvider router={router} />
-        
+          <RouterProvider router={router} />
+          
       </div>
 
   )

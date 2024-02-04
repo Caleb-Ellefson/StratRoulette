@@ -1,24 +1,90 @@
 import { Carousel } from 'react-responsive-carousel';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { image1, image2, image3, image4, image5, image6, image7 } from '../assets/images/Images';
+import { Link, Form, redirect, Outlet, useLoaderData } from 'react-router-dom';
+import customFetch from '../utils/customFetch';
+import { toast } from 'react-toastify';
+import { get } from 'mongoose';
+import React, { useEffect } from 'react';
 
 const images = [image1, image3, image2, image4, image5, image6, image7 ];
 
+
+
+
+
+
 const Landing = () => {
+
+  const logoutUser = async () => {
+    await customFetch.get('/auth/logout');
+    setState( state => {
+      return {
+        ...state,
+        isUserLoggedIn: false,
+        userAdmin: false
+      }
+      })
+  
+    toast.success('Logging out...');
+    redirect('/')
+  };
+
+
+
+  let [state, setState] = React.useState({
+    isUserLoggedIn : false,
+    userAdmin : false,
+  })
+  const getCurrentUser = async () => {
+    try {
+      const { data } = await customFetch.get('/users/current-user');
+      const status = data.user.role
+        if (status === 'admin'){
+           setState( state => {
+            return {
+              ...state,
+              isUserLoggedIn: true,
+              userAdmin: true
+            }
+            })
+        }
+        if (status === 'user'){
+          setState( state => {
+            return {
+              ...state,
+              isUserLoggedIn: true,
+              userAdmin: false
+            }
+            })
+        }
+      return {status};
+    } catch (error) {
+      return null
+    }
+  }
+    useEffect(() => {
+      getCurrentUser()
+    },[])
+
+  
   return (
     <Wrapper>
       <div className='under-color'>
         <div className='main'>
           <nav className='navBar'>
             <Link className='links' to={'/selection'}>Play</Link>
-            <Link className='links' to={'/Login'}>Login</Link>
-            <Link className='links' to={'/AddStrat'}>Add A Strat</Link>
+            {state.isUserLoggedIn === false && <Link className='links' to={'/Login'}>Login</Link>}
+            {state.isUserLoggedIn === true &&  <Link className='links' to={'/AddStrat'}>Add A Strat</Link>}
+            {state.isUserLoggedIn === true && <Link className='links' onClick={logoutUser}>Logout </Link>}
+            {state.userAdmin === true && 
+              <Link className='links' to={'/Admin'}>Admin</Link>
+            }
+            
           </nav>
           <div className='body'>
             <div className='text-container'>
               <div className='top-text'>
-                <h2 className='white'>COUNTERSTRIKE 2</h2>
                 <h2 className='orange'>COUNTERSTRIKE 2</h2>
                 <h2 className='white'>COUNTERSTRIKE 2</h2>
                 <h2 className='orange'>COUNTERSTRIKE 2</h2>
@@ -30,7 +96,6 @@ const Landing = () => {
                   <h2 className='orange'>STRAT-ROULETTE</h2>
                   <h2 className='white'>STRAT-ROULETTE</h2>
                   <h2 className='orange'>STRAT-ROULETTE</h2>
-                  <h2 className='white'>STRAT-ROULETTE</h2>
                 </div>
               </div>
             </div>
@@ -66,11 +131,15 @@ const Wrapper = styled.div`
   color: white;
 }
 
+
+
 .links{
   text-decoration: none;
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   background-color: #FF4C29;
-  padding: 10px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
   border-radius: 30px;
   opacity: 90%;
   box-shadow: 0px 0px 5px black;
@@ -82,9 +151,8 @@ const Wrapper = styled.div`
 
 .box {
     width: 100%;
-    max-width: 1200px; /* Adjust the maximum width as needed */
+    max-width: 90%; /* Adjust the maximum width as needed */
     margin: 0 auto;
-    margin-top: 150px;
     box-shadow: 0px 2px 15px black;
     display: flex;
     justify-content: center;
@@ -97,7 +165,7 @@ const Wrapper = styled.div`
 
   .slide img {
     max-width: 100%;
-    max-height: 500px; /* Adjust the maximum height as needed */
+    max-height: 700px; /* Adjust the maximum height as needed */
     margin: 0 auto;
   }
 
@@ -106,9 +174,10 @@ const Wrapper = styled.div`
     justify-content: flex-end;
     align-items: center;
     font-family: var(--main-font);
-    font-size: 35px;
+    font-size: 30px;
     gap: 100px;
-    margin-top: 50px;
+    margin-top: 15px;
+    margin-bottom:10px;
     margin-right: 120px;
     color: #ffff;
     text-shadow: 0px 5px 20px black;
@@ -134,6 +203,8 @@ const Wrapper = styled.div`
   .img-container{
     display: flex;
     justify-content: center;
+    padding: 4rem;
+
   }
 
 
@@ -152,14 +223,14 @@ const Wrapper = styled.div`
   }
 
   .top-text{
-    margin-left: 200px;
+    margin-left: 100px;
     height: 100%;
     width: 100vw;
   }
 
   .bottom-text{
-    margin-top: 150px;
-    margin-right: 200px;
+    margin-top: 270px;
+    margin-right: 100px;
     width: 100vw;
     text-align: right;
   }
