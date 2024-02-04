@@ -50,7 +50,7 @@ const Strat = () => {
               <div className='screen'>
                 <div className='text-container' key={rerenderKey}>
                   <h1 className='typeHeader'>
-                    <Typewriter text={`mission ${strat[randomIndex].stratName}`} delay={100} />
+                    <Typewriter text={`Mission: ${strat[randomIndex].stratName}`} delay={100} />
                   </h1>
                   <p className='type'>
                     <Typewriter text={strat[randomIndex].stratDescription} delay={100} />
@@ -163,7 +163,7 @@ const Wrapper = styled.div`
   }
   .typeHeader{
     margin-top: 30px;
-    font-size: 30px;
+    font-size: 32px;
     text-indent: 30px;
     color:#4AF626;
     font-family: var(--main-font);
