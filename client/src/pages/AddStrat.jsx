@@ -80,7 +80,6 @@ const AddStrat = () => {
                     name='Team'
                     labelText='Team'
                     list={teamTypeOptions}
-                    defaultValue={teamTypeOptions[2]}
                     />
                     <div className='form-row'>
                         <label className='form-label'>

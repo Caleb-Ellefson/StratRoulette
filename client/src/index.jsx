@@ -1,14 +1,12 @@
 import { createBrowserRouter,
- RouterProvider,
- useLoaderData
+ RouterProvider
 } from 'react-router-dom'
-import {Selection, Map, Strat, Error, Landing, Login, AddStrat, Register, Admin, AllStrats } from './pages/Index.js'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {Selection, Map, Strat, Error, Landing, Login, AddStrat, Register, Admin } from './pages/Index.js'
+import { QueryClient } from '@tanstack/react-query';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login.jsx'
 import { loader as userLoader } from './pages/Admin.jsx'
 import { action as submitAction } from './pages/AddStrat.jsx'
-import { loader as dataLoader } from './pages/AllStrats.jsx'
 import { loader as stratLoader } from './pages/Strat.jsx'
 
 
@@ -27,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/Strat',
-    element:<Strat/>,
+    element:<Strat />,
     loader: stratLoader,
   },
   {
@@ -57,13 +55,7 @@ const router = createBrowserRouter([
     element:<Admin/>,
     loader: userLoader,
     errorElement: <Error />
-  },
-  {
-    path:'/Admin',
-    element:<AllStrats />,
-    loader: dataLoader,
   }
-
 ])
 
 const App = () => {

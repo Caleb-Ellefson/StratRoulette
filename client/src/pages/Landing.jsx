@@ -77,9 +77,7 @@ const Landing = () => {
             {state.isUserLoggedIn === false && <Link className='links' to={'/Login'}>Login</Link>}
             {state.isUserLoggedIn === true &&  <Link className='links' to={'/AddStrat'}>Add A Strat</Link>}
             {state.isUserLoggedIn === true && <Link className='links' onClick={logoutUser}>Logout </Link>}
-            {state.userAdmin === true && 
-              <Link className='links' to={'/Admin'}>Admin</Link>
-            }
+            {state.userAdmin === true && <Link className='links' to={'/Admin'}>Admin</Link>}
             
           </nav>
           <div className='body'>
@@ -127,17 +125,9 @@ const Landing = () => {
 
 const Wrapper = styled.div`
 
-Link:visited {
-  color: white;
-  text-emphasis: none;
-}
-
-Link:hover {
-  text-decoration: none !important;
-}
 
 .links{
-  text-decoration: none;
+  text-decoration: none !important; 
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   background-color: #FF4C29;
   padding-top: 5px;
@@ -146,10 +136,7 @@ Link:hover {
   border-radius: 30px;
   opacity: 90%;
   box-shadow: 0px 0px 5px black;
-}
-
-.links:hover{
-  transform: scale(1.05);
+  color: white;
 }
 
 .box {
@@ -173,6 +160,7 @@ Link:hover {
   }
 
 .navBar {
+    text-decoration: none; 
     display: flex;
     justify-content: flex-end;
     align-items: center;

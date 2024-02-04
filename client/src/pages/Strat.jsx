@@ -2,16 +2,15 @@ import styled from 'styled-components';
 import Reroll from '../assets/images/reroll.png';
 import Typewriter from '../components/TyperWriter';
 import Nav from '../components/Nav'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
-import { Link, Navigate, useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 
 export const loader = async () => {
   try {
     const { data } = await customFetch.get("/strats/all");
-
     return { data };
   } catch (error) {
     toast.error("Something went wrong getting strats");
@@ -38,7 +37,7 @@ const Strat = () => {
     setRandomIndex(newIndex); // Update the random index
     setRerenderKey(prevKey => prevKey + 1); // Increment the rerender key
   }
-
+ console.log(strat)
   return (
     <div className='under-color'>
       <div className='main-color'>
@@ -50,10 +49,10 @@ const Strat = () => {
               <div className='screen'>
                 <div className='text-container' key={rerenderKey}>
                   <h1 className='typeHeader'>
-                    <Typewriter text={`Mission: ${strat[randomIndex].stratName}`} delay={100} />
+                    <Typewriter text={`Mission: ${strat[randomIndex]?.stratName}`} delay={100} />
                   </h1>
                   <p className='type'>
-                    <Typewriter text={strat[randomIndex].stratDescription} delay={100} />
+                    <Typewriter text={strat[randomIndex]?.stratDescription} delay={100} />
                   </p>
                 </div>
               </div>
