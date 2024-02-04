@@ -177,6 +177,7 @@ const Wrapper = styled.div`
     font-size: 30px;
     gap: 100px;
     margin-top: 15px;
+    margin-bottom:10px;
     margin-right: 120px;
     color: #ffff;
     text-shadow: 0px 5px 20px black;

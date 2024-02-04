@@ -9,6 +9,7 @@ import { action as loginAction } from './pages/Login.jsx'
 import { loader as userLoader } from './pages/Admin.jsx'
 import { action as submitAction } from './pages/AddStrat.jsx'
 import { loader as dataLoader } from './pages/AllStrats.jsx'
+import { loader as stratLoader } from './pages/Strat.jsx'
 
 
 
@@ -26,8 +27,8 @@ const router = createBrowserRouter([
   },
   {
     path:'/Strat',
-    element:<Strat/>
- 
+    element:<Strat/>,
+    loader: stratLoader,
   },
   {
     path:'/Selection',
@@ -54,7 +55,6 @@ const router = createBrowserRouter([
   {
     path:'/Admin',
     element:<Admin/>,
-
     loader: userLoader,
     errorElement: <Error />
   },

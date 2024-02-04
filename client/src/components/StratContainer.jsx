@@ -8,8 +8,7 @@ const StratContainer = () => {
 
     //data passed down from loader
    const { data } = useAllStratsContext()
-   const { strat } = data;
-   console.log(strat)
+   const { strat } = data
 
    if (strat.length === 0 ){
     return(
