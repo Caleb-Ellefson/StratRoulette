@@ -35,7 +35,7 @@ const Strat = ({
 
         return navigate('/admin');
       } catch (error) {
-        toast.error('Error adding job.')
+        toast.error('Error adding strat.')
         return error
       }
     } 
@@ -43,10 +43,10 @@ const Strat = ({
     const deleteStrat = async ()  => {
       try {
         await customFetch.delete(`/strats/${_id}`)
-        toast.success('Job deleted')
+        toast.success('Strat deleted')
         return navigate('/admin')
       } catch (error) {
-        toast.error('Error deleting job.')
+        toast.error('Error deleting Strat.')
         return error
       }
     } 
