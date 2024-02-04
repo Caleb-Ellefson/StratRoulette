@@ -220,10 +220,12 @@ const Wrapper = styled.div`
   }
 
   .bottom-text{
-    margin-top: 270px;
-    margin-right: 100px;
-    width: 100vw;
+    width: auto;
+    position: fixed;
+    bottom: 100px; /* Adjust the distance from the bottom as needed */
+    right: 100px; /* Adjust the distance from the right as needed */
     text-align: right;
+    z-index: 10;
   }
 
   .img-container {
