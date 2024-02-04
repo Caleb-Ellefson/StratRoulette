@@ -5,10 +5,6 @@ const router = Router()
 
 import { createStrat, findStrat, deleteStrat, updateStrat, approvedStrat, getStrat } from '../controllers/stratController.js'
 
-// router.post('/',createStrat)
-
-
-//Chain .post(function).get(function).delete(function)
 router.route('/').post(validateStratInput, createStrat).get(findStrat)
 router.route('/all').get(approvedStrat)
 router.route('/:id').delete(deleteStrat).patch(updateStrat).get(getStrat)
