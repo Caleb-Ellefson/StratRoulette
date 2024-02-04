@@ -73,7 +73,7 @@ const Landing = () => {
       <div className='under-color'>
         <div className='main'>
           <nav className='navBar'>
-            <Link className='links' to={'/selection'}>Play</Link>
+            {state.isUserLoggedIn === true && <Link className='links' to={'/selection'}>Play</Link>}
             {state.isUserLoggedIn === false && <Link className='links' to={'/Login'}>Login</Link>}
             {state.isUserLoggedIn === true &&  <Link className='links' to={'/AddStrat'}>Add A Strat</Link>}
             {state.isUserLoggedIn === true && <Link className='links' onClick={logoutUser}>Logout </Link>}
@@ -155,7 +155,7 @@ const Wrapper = styled.div`
 
   .slide img {
     max-width: 100%;
-    max-height: 700px; /* Adjust the maximum height as needed */
+    max-height: 1100px; /* Adjust the maximum height as needed */
     margin: 0 auto;
   }
 
@@ -225,6 +225,32 @@ const Wrapper = styled.div`
     width: 100vw;
     text-align: right;
   }
+
+  .img-container {
+    display: flex;
+    justify-content: center;
+    padding: 4rem;
+
+    .box {
+      width: 100%;
+      max-width: 90%;
+      margin: 0 auto;
+      box-shadow: 0px 2px 15px black;
+      display: flex;
+      justify-content: center;
+    }
+
+    .slide {
+      text-align: center;
+    }
+
+    .carousel-image {
+      max-width: 100%;
+      max-height: 85vh; /* Adjust the maximum height as needed */
+      margin: 0 auto;
+    }
+  }
+
 
 `
 

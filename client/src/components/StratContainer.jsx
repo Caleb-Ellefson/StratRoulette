@@ -13,14 +13,16 @@ const StratContainer = () => {
    if (strat.length === 0 ){
     return(
         <Wrapper>
+            <NavBar />
             <h2>There are no Strats to display...</h2>
         </Wrapper>
     )
    }
   return (
     <Wrapper>
-        <NavBar />
+      <NavBar />
         <div className='jobs'>
+
             {strat.map((strats)=>{
                 return <Strat key={strats._id} {...strats}/>
             })}

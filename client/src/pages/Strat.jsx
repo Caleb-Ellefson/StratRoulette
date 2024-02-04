@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 
-
 export const loader = async () => {
   try {
     const { data } = await customFetch.get("/strats/all");
@@ -37,7 +36,6 @@ const Strat = () => {
     setRandomIndex(newIndex); // Update the random index
     setRerenderKey(prevKey => prevKey + 1); // Increment the rerender key
   }
- console.log(strat)
   return (
     <div className='under-color'>
       <div className='main-color'>
@@ -105,6 +103,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 80px;
     margin-top: 20px;
+    margin-bottom:20px;
     font-family: var(--main-font);
     color: white;
     font-size: 4vw;
