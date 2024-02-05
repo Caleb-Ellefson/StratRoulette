@@ -42,7 +42,7 @@
     <a href="https://github.com/Caleb-Ellefson/StratRoulette"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Caleb-Ellefson/StratRoulette">View Demo</a>
+    <a href="https://counter-strike-roulette.onrender.com/">View Live Site</a>
     ·
     <a href="https://github.com/Caleb-Ellefson/StratRoulette/issues">Report Bug</a>
     ·
