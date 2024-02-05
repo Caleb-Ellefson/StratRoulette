@@ -17,7 +17,7 @@ import image4 from './image4.jpg'
 import image5 from './image5.jpg'
 import image6 from './image6.jpg'
 import image7 from './image7.jpg'
-import Both from './Both.jpg'
+import Both from './Both.png'
 
 
 
