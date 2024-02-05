@@ -9,11 +9,6 @@ import React, { useEffect } from 'react';
 
 const images = [image1, image3, image2, image4, image5, image6, image7 ];
 
-
-
-
-
-
 const Landing = () => {
 
   const logoutUser = async () => {
@@ -29,8 +24,6 @@ const Landing = () => {
     toast.success('Logging out...');
     redirect('/')
   };
-
-
 
   let [state, setState] = React.useState({
     isUserLoggedIn : false,
@@ -67,7 +60,6 @@ const Landing = () => {
       getCurrentUser()
     },[])
 
-  
   return (
     <Wrapper>
       <div className='under-color'>
@@ -125,7 +117,6 @@ const Landing = () => {
 
 const Wrapper = styled.div`
 
-
 .links{
   text-decoration: none !important; 
   transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -146,7 +137,6 @@ const Wrapper = styled.div`
     box-shadow: 0px 2px 15px black;
     display: flex;
     justify-content: center;
-
   }
 
   .slide {
@@ -197,7 +187,6 @@ const Wrapper = styled.div`
     padding: 4rem;
 
   }
-
 
   .text-container{
     width: 100vw;
