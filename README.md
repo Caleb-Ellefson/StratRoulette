@@ -99,27 +99,15 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-
-<!-- USAGE EXAMPLES -->
-
-![alt text](client/src/assets/images/typewriter.gif)
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Extended profile page,
+  -  [ ] allow users to customize their profle with a profile picture
+  -  [ ] tell a little about themselves and with a header to their profile.
+- [ ] Adding more custom types of strats that include short videos, gif, drawings ect.
+- [ ] Groups
+    - [ ] Create a group of friends that can party up and all have the same strats pop up.
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
@@ -157,7 +145,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Caleb Ellefson - calebroger@gmail.com
 
 Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
 
@@ -168,9 +156,8 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [John Smilga](https://github.com/john-smilga/mern-jobify-v2)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
