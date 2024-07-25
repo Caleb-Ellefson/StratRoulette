@@ -99,6 +99,34 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+- **Dynamic Front-End:** Built with React and VITE, including pages for Landing, Error, Register, and Dashboard.
+- **Advanced React Functionality:** Programmatic navigation, protected routes, and logout features.
+- **Backend Server:** Implemented using Express and ES6 modules, with efficient development using "nodemon".
+- **Database Integration:** MongoDB cloud database managed with Atlas, including route and controller creation.
+- **Security:** JWT-based authentication, password hashing, and secure authorization.
+- **API Management:** Axios for API interactions and data manipulation.
+- **Testing:** Extensive testing with Thunder Client, error handling in Express.
+- **Deployment:** Deployed on Render with pagination and real-world readiness.
+
+## Technologies Used
+
+- **Frontend:**
+  - React
+  - VITE
+  - React Router 6
+  - Axios
+- **Backend:**
+  - Node.js
+  - Express
+  - MongoDB (Atlas)
+- **Tools:**
+  - Nodemon
+  - Thunder Client
+  - JWT
+  - Render
+
+
+
 <!-- ROADMAP -->
 ## Roadmap
 
